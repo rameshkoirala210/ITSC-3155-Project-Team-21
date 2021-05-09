@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/textViewPassword"
-        android:layout_width="320dp"
+        android:layout_width="290dp"
         android:layout_height="40dp"
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
@@ -18,24 +18,55 @@
 
     <TextView
         android:id="@+id/textViewEmail"
-        android:layout_width="320dp"
+        android:layout_width="290dp"
         android:layout_height="40dp"
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPassword"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewWebsite" />
 
     <ImageView
         android:id="@+id/imageViewtrash"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="15dp"
         android:src="@drawable/rubbish_bin"
-        app:layout_constraintStart_toEndOf="@+id/textViewEmail"
+        app:layout_constraintStart_toEndOf="@+id/textViewWebsite"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewWebsite"
+        android:layout_width="290dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewedit"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toEndOf="@+id/textViewEmail"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewtrash"
+        app:srcCompat="@drawable/edit" />
+
+    <Button
+        android:id="@+id/buttonshowpassword"
+        android:layout_width="78dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/button_show"
+        app:layout_constraintStart_toEndOf="@+id/textViewPassword"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewedit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

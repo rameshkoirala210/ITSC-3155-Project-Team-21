@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -83,7 +84,8 @@ public class ContactFragment extends Fragment {
                     contactsList.clear();
                     for(QueryDocumentSnapshot queryDocumentSnapshot: value) {
                         Contact contact = queryDocumentSnapshot.toObject(Contact.class);
-                        contactsList.add(contact);
+                        if (mAuth.getCurrentUser().getUid().equals(contact.getUid()))
+                            contactsList.add(contact);
                     }
                     recyclerView.setAdapter(adapter);
                 }
@@ -103,6 +105,7 @@ public class ContactFragment extends Fragment {
     interface ContactListener{
         void gotoNewContactFragment();
         void gotoLoginFragmentafterLogout();
+        void gotoEditContactFragment(Contact contact);
     }
 
     private class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactHolder>{
@@ -125,19 +128,45 @@ public class ContactFragment extends Fragment {
         }
 
         public class ContactHolder extends RecyclerView.ViewHolder {
-            TextView textViewEmail, textViewPassword;
-            ImageView imageViewTrash;
+            TextView textViewEmail, textViewPassword, textViewWebsite;
+            ImageView imageViewTrash, imageViewEditContact;
+            Button btn_passwordShow;
 
             public ContactHolder(@NonNull View itemView) {
                 super(itemView);
                 textViewEmail = itemView.findViewById(R.id.textViewEmail);
                 textViewPassword = itemView.findViewById(R.id.textViewPassword);
+                textViewWebsite = itemView.findViewById(R.id.textViewWebsite);
                 imageViewTrash = itemView.findViewById(R.id.imageViewtrash);
+                btn_passwordShow = itemView.findViewById(R.id.buttonshowpassword);
+                imageViewEditContact = itemView.findViewById(R.id.imageViewedit);
             }
 
             public void setUpContactItem(Contact contact) {
                 textViewEmail.setText(contact.getEmail());
-                textViewPassword.setText(contact.getPassword());
+                //textViewPassword.setText(contact.getPassword());
+                textViewWebsite.setText(contact.getWebsite());
+                imageViewEditContact.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mListener.gotoEditContactFragment(contact);
+                    }
+                });
+
+                btn_passwordShow.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (btn_passwordShow.getText().toString().toLowerCase().equals("show")) {
+                            textViewPassword.setText(contact.getPassword());
+                            btn_passwordShow.setText("HIDE");
+                        } else if (btn_passwordShow.getText().toString().toLowerCase().equals("hide")) {
+                            textViewPassword.setText("");
+                            btn_passwordShow.setText("Show");
+                        }
+                    }
+                });
+
+
                 imageViewTrash.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

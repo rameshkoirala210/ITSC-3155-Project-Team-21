@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class NewContactFragment extends Fragment {
-    EditText editTextEmail, editTextPassword;
+    EditText editTextEmail, editTextPassword, editTextWebsite;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
 
@@ -37,6 +37,7 @@ public class NewContactFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_new_contact, container, false);
         editTextEmail = view.findViewById(R.id.edittextNewEmail);
         editTextPassword = view.findViewById(R.id.edittextPassword);
+        editTextWebsite = view.findViewById(R.id.editTextwebsite);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
@@ -56,14 +57,18 @@ public class NewContactFragment extends Fragment {
                             setMessage("Email is Incorrect")
                             .setPositiveButton("OK", null)
                             .show();
-                }
-                else if(editTextPassword.getText().toString().isEmpty()) {
+                } else if(editTextPassword.getText().toString().isEmpty()) {
                     builder.setTitle("Missing Fields").
                             setMessage("Password is Empty")
                             .setPositiveButton("OK", null)
                             .show();
-                }else{
-                    setData(editTextEmail.getText().toString(), editTextPassword.getText().toString());
+                } else if (editTextWebsite.getText().toString().isEmpty()) {
+                    builder.setTitle("Missing Fields").
+                            setMessage("Website is Empty")
+                            .setPositiveButton("OK", null)
+                            .show();
+                } else {
+                    setData(editTextEmail.getText().toString(), editTextPassword.getText().toString(), editTextWebsite.getText().toString());
                 }
             }
         });
@@ -97,11 +102,12 @@ public class NewContactFragment extends Fragment {
         }
     }
 
-    private void setData(String email, String password){
+    private void setData(String email, String password, String website){
         HashMap<String,Object> user = new HashMap<>();
         user.put("uid", mAuth.getCurrentUser().getUid());
         user.put("email", email);
         user.put("password", password);
+        user.put("website", website);
         db.collection("Contact")
                 .add(user)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

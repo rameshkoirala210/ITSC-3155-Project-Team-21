@@ -7,6 +7,7 @@
     <string name="button_Login">Login</string>
     <string name="button_NewAccount">Create New Account</string>
     <string name="text_Name">Name</string>
+    <string name="text_website">Website</string>
     <string name="button_Submit">Submit</string>
     <string name="button_Cancel">Cancel</string>
     <string name="text_Welcome">Welcome !!</string>
@@ -18,4 +19,5 @@
     <string name="strForumDescription">Forum Description</string>
     <string name="strPost">Post</string>
     <string name="strhintWriteComment">Write Comment</string>
+    <string name="button_show">Show</string>
 </resources>

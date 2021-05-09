@@ -5,15 +5,17 @@ public class Contact {
     String email;
     String password;
     String uid;
+    String website;
 
     public Contact() {
     }
 
-    public Contact(String documentID, String email, String password, String uid) {
+    public Contact(String documentID, String email, String password, String uid, String website) {
         this.documentID = documentID;
         this.email = email;
         this.password = password;
         this.uid = uid;
+        this.website = website;
     }
 
     public String getDocumentID() {
@@ -48,6 +50,14 @@ public class Contact {
         this.uid = uid;
     }
 
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
     @Override
     public String toString() {
         return "Contact{" +
@@ -55,6 +65,7 @@ public class Contact {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", uid='" + uid + '\'' +
+                ", website='" + website + '\'' +
                 '}';
     }
 }

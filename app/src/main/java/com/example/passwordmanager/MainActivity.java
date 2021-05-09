@@ -55,6 +55,13 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
     }
 
     @Override
+    public void gotoEditContactFragment(Contact contact) {
+        EditContactFragment fragment = new EditContactFragment();
+        fragment.setContact(contact);
+        getSupportFragmentManager().beginTransaction().replace(R.id.layout, fragment).addToBackStack(null).commit();
+    }
+
+    @Override
     public void gotoContactFragmentAfterCancel() {
         getSupportFragmentManager().popBackStack();
     }
